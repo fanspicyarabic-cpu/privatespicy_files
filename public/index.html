@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VIP Exclusive | Premium Store</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Google Fonts: Readex Pro & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-base: #08090d;
+            --bg-card: rgba(18, 20, 29, 0.75);
+            --bg-card-solid: #131520;
+            --bg-input: rgba(10, 12, 18, 0.85);
+            --primary-gold: #ffc837;
+            --primary-gold-end: #ff8008;
+            --gold-gradient: linear-gradient(135deg, #ffe066 0%, #ffc837 50%, #f59e0b 100%);
+            --gold-glow: rgba(255, 200, 55, 0.25);
+            --gold-border: rgba(255, 200, 55, 0.22);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-card: rgba(23, 26, 38, 0.65);
+            --text-main: #ffffff;
+            --text-muted: #8e95a5;
+            --text-dim: #5c6275;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Readex Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(255, 200, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 128, 8, 0.04) 0%, transparent 40%);
+            color: var(--text-main);
+            direction: rtl;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .num-font {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        #app-container {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 16px 16px 105px 16px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* --- Header Styling --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 4px 18px 4px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar-wrap {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg-base), var(--bg-base)) padding-box, var(--gold-gradient) border-box;
+            box-shadow: 0 4px 14px var(--gold-glow);
+        }
+
+        .vip-badge-icon {
+            position: absolute;
+            bottom: -3px;
+            right: -3px;
+            background: var(--gold-gradient);
+            color: #000;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-base);
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .vip-badge-icon.unverified {
+            background: #4b5563;
+            color: #9ca3af;
+        }
+
+        .profile-info h3 {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .profile-info p {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.2px;
+            max-width: 180px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--glass-card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .header-btn:active {
+            transform: scale(0.92);
+            background: rgba(255, 200, 55, 0.15);
+            border-color: var(--primary-gold);
+        }
+
+        /* --- Luxury Balance Card --- */
+        .balance-card {
+            background: linear-gradient(145deg, #181b29 0%, #0d0f17 100%);
+            border: 1px solid var(--gold-border);
+            border-radius: 26px;
+            padding: 24px 22px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(255, 200, 55, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 80% 20%, rgba(255, 200, 55, 0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .balance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .balance-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .balance-vip-pill {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .balance-vip-pill.verified {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+        }
+
+        .balance-vip-pill.unverified {
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: var(--primary-gold);
+            animation: pulseSubtle 2.5s infinite;
+        }
+
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+            50% { transform: scale(1.02); box-shadow: 0 0 10px rgba(245, 158, 11, 0.25); }
+        }
+
+        .balance-amount-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+            gap: 6px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .currency-symbol {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+        }
+
+        .balance-val {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .deposit-action-btn {
+            background: var(--gold-gradient);
+            color: #0d0f17;
+            border: none;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 170, 0, 0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .deposit-action-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 4px 12px rgba(255, 170, 0, 0.2);
+        }
+
+        /* --- Stats Grid Modern --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--glass-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 14px 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:active {
+            transform: scale(0.96);
+            border-color: var(--primary-gold);
+        }
+
+        .stat-icon-wrapper {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(255, 200, 55, 0.1);
+            border: 1px solid rgba(255, 200, 55, 0.2);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-card:nth-child(2) .stat-icon-wrapper {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .stat-card:nth-child(3) .stat-icon-wrapper {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .stat-number {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+
+        .stat-text {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* --- Verification Promo Card --- */
+        .verification-banner {
+            background: linear-gradient(135deg, rgba(255, 200, 55, 0.1) 0%, rgba(245, 158, 11, 0.03) 100%);
+            border: 1px dashed rgba(255, 200, 55, 0.35);
+            border-radius: 18px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .verification-banner:active {
+            transform: scale(0.98);
+            background: rgba(255, 200, 55, 0.15);
+        }
+
+        .ver-banner-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ver-banner-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--gold-gradient);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px var(--gold-glow);
+        }
+
+        .ver-banner-text strong {
+            font-size: 0.88rem;
+            color: #fff;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .ver-banner-text p {
+            font-size: 0.72rem;
+            color: var(--primary-gold);
+        }
+
+        .ver-banner-action {
+            background: rgba(255, 200, 55, 0.15);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        /* --- Section Title & Controls --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding: 0 4px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+        }
+
+        .section-title span.badge-count {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--primary-gold);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Search Bar */
+        .search-box-wrap {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            background: var(--bg-card-solid);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 12px 42px 12px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 15px rgba(255, 200, 55, 0.15);
+            background: rgba(20, 23, 35, 0.95);
+        }
+
+        .search-box::placeholder {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* --- Celebrity Content Grid --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .celeb-card {
+            background: var(--bg-card-solid);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .celeb-card:active {
+            transform: scale(0.96);
+            border-color: var(--primary-gold);
+        }
+
+        .celeb-img-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            background: #11131c;
+        }
+
+        .celeb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .celeb-card:hover .celeb-img {
+            transform: scale(1.05);
+        }
+
+        .celeb-badge-vip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 200, 55, 0.3);
+            color: var(--primary-gold);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 2;
+        }
+
+        .celeb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 11, 16, 0.95) 0%, rgba(10, 11, 16, 0.4) 45%, transparent 70%);
+            z-index: 1;
+        }
+
+        .celeb-details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            z-index: 2;
+        }
+
+        .celeb-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            line-height: 1.25;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .celeb-price-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 5px 8px;
+        }
+
+        .celeb-price-usd {
+            color: var(--primary-gold);
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .celeb-price-stars {
+            color: #c4c9d6;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        /* --- Deposit Methods List --- */
+        .method-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .method-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .method-item:active {
+            transform: scale(0.98);
+            border-color: var(--primary-gold);
+            background: rgba(255, 200, 55, 0.05);
+        }
+
+        .method-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .method-icon-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 200, 55, 0.1);
+            border: 1px solid rgba(255, 200, 55, 0.2);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .method-info strong {
+            display: block;
+            font-size: 0.92rem;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .method-info span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .method-arrow {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* --- Orders List & Badges --- */
+        .order-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-card-title {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #fff;
+        }
+
+        .order-card-price {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+        }
+
+        .order-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .order-status-approved {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .order-status-pending {
+            background: rgba(255, 200, 55, 0.12);
+            color: var(--primary-gold);
+            border: 1px solid rgba(255, 200, 55, 0.25);
+        }
+
+        .order-status-rejected {
+            background: rgba(239, 68, 68, 0.12);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .order-reject-reason {
+            font-size: 0.75rem;
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.08);
+            border-right: 3px solid var(--danger);
+            padding: 8px 12px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .order-card-completed {
+            border-color: rgba(255, 200, 55, 0.35);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 200, 55, 0.05) 100%);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .order-card-completed:active {
+            transform: scale(0.985);
+            border-color: var(--primary-gold);
+        }
+
+        .order-content-footer {
+            margin-top: 6px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-open-content {
+            width: 100%;
+            background: linear-gradient(135deg, #ffc837 0%, #ff8008 100%);
+            color: #0d0f17;
+            font-weight: 800;
+            font-size: 0.88rem;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 170, 0, 0.28);
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-open-content:active {
+            transform: scale(0.97);
+            filter: brightness(1.1);
+        }
+
+        /* --- VIP Verification Modal Specifics --- */
+        .ver-perks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .ver-perk-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: right;
+        }
+
+        .ver-perk-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 200, 55, 0.12);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .ver-perk-text strong {
+            font-size: 0.85rem;
+            color: #fff;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .ver-perk-text p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .ver-req-box {
+            background: rgba(255, 200, 55, 0.07);
+            border: 1px solid var(--gold-border);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .ver-req-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .ver-req-desc {
+            font-size: 0.75rem;
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        /* --- Modern Bottom Navigation --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 408px;
+            height: 70px;
+            background: rgba(14, 16, 23, 0.88);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 2000;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03);
+            padding: 0 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.68rem;
+            font-weight: 500;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 16px;
+            transition: all 0.25s ease;
+            position: relative;
+            flex: 1;
+        }
+
+        .nav-item i {
+            font-size: 1.25rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item.active {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px) scale(1.1);
+            color: var(--primary-gold);
+            filter: drop-shadow(0 2px 8px var(--gold-glow));
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            width: 14px;
+            height: 3px;
+            background: var(--gold-gradient);
+            border-radius: 4px;
+            box-shadow: 0 0 8px var(--primary-gold);
+        }
+
+        /* --- Tabs Animations --- */
+        .main-tab-content {
+            display: none;
+        }
+
+        .main-tab-content.active {
+            display: block;
+            animation: modernFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modernFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Luxury Bottom Sheet Modals --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: none;
+            z-index: 3000;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: overlayFadeIn 0.25s ease;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-sheet {
+            width: 100%;
+            max-width: 440px;
+            background: #12141e;
+            border: 1px solid var(--gold-border);
+            border-bottom: none;
+            border-radius: 28px 28px 0 0;
+            padding: 20px 22px 36px 22px;
+            position: relative;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+            animation: sheetSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 88vh;
+            overflow-y: auto;
+        }
+
+        @keyframes sheetSlideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .sheet-drag-handle {
+            width: 40px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 0 auto 16px auto;
+        }
+
+        .sheet-icon-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .sheet-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            background: rgba(255, 200, 55, 0.12);
+            border: 1px solid rgba(255, 200, 55, 0.25);
+            color: var(--primary-gold);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 20px rgba(255, 200, 55, 0.15);
+        }
+
+        .sheet-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .sheet-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Modal Input Styles --- */
+        .modal-input-group {
+            margin-bottom: 16px;
+        }
+
+        .modal-input, .modal-select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-input);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .modal-input:focus, .modal-select:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 16px rgba(255, 200, 55, 0.15);
+        }
+
+        .modal-btn-primary {
+            width: 100%;
+            padding: 15px;
+            border-radius: 16px;
+            border: none;
+            background: var(--gold-gradient);
+            color: #0c0e14;
+            font-weight: 800;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255, 170, 0, 0.3);
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .modal-btn-cancel {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.88rem;
+            padding: 10px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-btn-cancel:active {
+            color: #fff;
+        }
+
+        /* --- Toast Notification --- */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 380px;
+            pointer-events: none;
+        }
+
+        .toast-msg {
+            background: rgba(18, 20, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--gold-border);
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+            animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <div id="app-container">
+        <!-- Modern Header -->
+        <header class="dashboard-header">
+            <div class="user-profile" onclick="openVerificationModal()">
+                <div class="profile-avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=VIP&background=ffc837&color=000&bold=true" id="user-avatar" class="profile-img" alt="Avatar">
+                    <div class="vip-badge-icon unverified" id="avatar-vip-badge"><i class="fas fa-crown"></i></div>
+                </div>
+                <div class="profile-info">
+                    <h3>مرحباً بك 👋 <span class="num-font" id="user-tier-badge" style="color:var(--text-muted); font-weight:700; font-size:0.75rem;">غير موثق ⚠️</span></h3>
+                    <p id="user-full-name">زائر جديد</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="header-btn" id="btn-support-header" onclick="triggerSupport()">
+                    <i class="fas fa-headset"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab 1: Home View -->
+        <section id="home-view" class="main-tab-content active">
+            <!-- Luxury Balance Card -->
+            <div class="balance-card">
+                <div class="balance-header">
+                    <span class="balance-label"><i class="fas fa-coins" style="color:var(--primary-gold);"></i> الرصيد المتاح</span>
+                    <div class="balance-vip-pill unverified" id="balance-ver-badge" onclick="openVerificationModal()">
+                        <i class="fas fa-shield-halved"></i> <span>غير موثق (توثيق)</span>
+                    </div>
+                </div>
+
+                <div class="balance-amount-row">
+                    <span class="currency-symbol num-font">$</span>
+                    <span class="balance-val num-font" id="balance">0.00</span>
+                </div>
+
+                <button class="deposit-action-btn" onclick="hapticTap(); switchMainTab('recharge');">
+                    <i class="fas fa-plus-circle"></i> شحن الرصيد الآن
+                </button>
+            </div>
+
+            <!-- Verification Action Banner (Shows when unverified) -->
+            <div class="verification-banner" id="verification-banner" onclick="openVerificationModal()">
+                <div class="ver-banner-info">
+                    <div class="ver-banner-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="ver-banner-text">
+                        <strong>وثّق حسابك الآن مجاناً 👑</strong>
+                        <p>احصل على خصومات حصرية وتحديثات دائمة</p>
+                    </div>
+                </div>
+                <div class="ver-banner-action">
+                    توثيق <i class="fas fa-arrow-left"></i>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="stat-number num-font">$<span id="total-purchases">0.00</span></span>
+                    <span class="stat-text">إجمالي المشتريات</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-bag-shopping"></i>
+                    </div>
+                    <span class="stat-number num-font" id="order-count">0</span>
+                    <span class="stat-text">الطلبات المكتملة</span>
+                </div>
+
+                <div class="stat-card" id="btn-support" style="cursor:pointer;" onclick="triggerSupport()">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span class="stat-number">مباشر</span>
+                    <span class="stat-text">الدعم الفني</span>
+                </div>
+            </div>
+
+            <!-- Search & Section Header -->
+            <div class="search-box-wrap">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="celeb-search" class="search-box" placeholder="ابحث عن المحتوى أو المشاهير..." oninput="filterCelebs(this.value)">
+            </div>
+
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fas fa-fire" style="color:#ff6b6b;"></i>
+                    <span>المحتوى الحصري</span>
+                    <span class="badge-count num-font" id="celebs-total-count">0</span>
+                </div>
+                <small id="init-status" style="font-size: 0.7rem; color: var(--primary-gold);"></small>
+            </div>
+
+            <div id="celebrity-grid" class="grid-container">
+                <!-- Loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Tab 2: Recharge View -->
+        <section id="recharge-view" class="main-tab-content">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <div class="section-title">
+                    <i class="fas fa-wallet" style="color:var(--primary-gold);"></i>
+                    <span>وسائل الإيداع المعتمدة</span>
+                </div>
+            </div>
+            
+            <div id="deposit-methods" class="method-list">
+                <!-- Dynamic Methods -->
+            </div>
+        </section>
+
+        <!-- Tab 3: Orders History View -->
+        <section id="orders-view" class="main-tab-content">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <div class="section-title">
+                    <i class="fas fa-receipt" style="color:var(--primary-gold);"></i>
+                    <span>سجل الطلبات والعمليات</span>
+                </div>
+            </div>
+
+            <div id="client-orders-list" class="method-list">
+                <div style="text-align: center; color: var(--text-dim); padding: 50px 20px;">
+                    <i class="fas fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4;"></i>
+                    <p>لا توجد طلبات سابقة حتى الآن</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Bottom Navigation Bar -->
+        <nav class="bottom-nav">
+            <div onclick="hapticTap(); switchMainTab('home')" class="nav-item active" id="nav-home">
+                <i class="fas fa-house"></i>
+                <span>الرئيسية</span>
+            </div>
+            <div onclick="hapticTap(); switchMainTab('recharge')" class="nav-item" id="nav-recharge">
+                <i class="fas fa-wallet"></i>
+                <span>الإيداع</span>
+            </div>
+            <div onclick="hapticTap(); switchMainTab('orders')" class="nav-item" id="nav-orders">
+                <i class="fas fa-clock-rotate-left"></i>
+                <span>السجل</span>
+            </div>
+            <div onclick="hapticTap(); triggerInvite();" class="nav-item" id="nav-invite" data-url="https://t.me/">
+                <i class="fas fa-user-plus"></i>
+                <span>دعوة</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ===== Bottom Sheet Modals ===== -->
+
+    <!-- Account Verification Modal (NEW) -->
+    <div id="verificationModal" class="modal" onclick="if(event.target === this) closeModal('verificationModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle" id="ver-modal-icon-circle">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3 class="sheet-title" id="ver-modal-title">توثيق الحساب الملكي (VIP)</h3>
+                <p class="sheet-subtitle" id="ver-modal-subtitle">حالة الحساب الحالية: <span id="ver-status-text" style="color:var(--primary-gold); font-weight:700;">غير موثق ⚠️</span></p>
+            </div>
+
+            <!-- Requirement Condition Card -->
+            <div class="ver-req-box">
+                <div class="ver-req-title">
+                    <i class="fas fa-circle-exclamation"></i>
+                    <span>شرط التوثيق التلقائي:</span>
+                </div>
+                <p class="ver-req-desc">
+                    يكفي إتمام <strong>عملية شراء واحدة على الأقل 🛒</strong> أو <strong>شحن رصيد الحساب لأول مرة 💳</strong>. بعد تأكيد العملية يتحول حسابك فوراً إلى حساب موثق مدى الحياة.
+                </p>
+            </div>
+
+            <!-- Verification Benefits -->
+            <div style="font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 8px;">
+                <i class="fas fa-crown" style="color:var(--primary-gold);"></i> ميزات الحساب الموثق:
+            </div>
+            
+            <div class="ver-perks-list">
+                <div class="ver-perk-item">
+                    <div class="ver-perk-icon"><i class="fas fa-tags"></i></div>
+                    <div class="ver-perk-text">
+                        <strong>خصومات حصرية خاصة</strong>
+                        <p>تخفيضات إضافية على كافة الحزم والملفات المعروضة.</p>
+                    </div>
+                </div>
+
+                <div class="ver-perk-item">
+                    <div class="ver-perk-icon"><i class="fas fa-rotate"></i></div>
+                    <div class="ver-perk-text">
+                        <strong>تحديثات الملفات بشكل دائم ومجاني</strong>
+                        <p>الحصول على أي تحديثات جديدة للملفات المشتراة مستقبلاً بدون أي تكلفة إضافية.</p>
+                    </div>
+                </div>
+
+                <div class="ver-perk-item">
+                    <div class="ver-perk-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="ver-perk-text">
+                        <strong>أولوية وسرعة المعالجة</strong>
+                        <p>معالجة فورية لعمليات الشحن وتسليم الملفات والدعم المباشر.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons inside verification modal -->
+            <div id="ver-modal-actions">
+                <button onclick="closeModal('verificationModal'); switchMainTab('recharge');" class="modal-btn-primary">
+                    <i class="fas fa-wallet"></i> شحن الرصيد للتوثيق الآن
+                </button>
+                <button onclick="closeModal('verificationModal'); switchMainTab('home');" class="modal-btn-cancel" style="border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px; margin-top: 5px;">
+                    <i class="fas fa-bag-shopping"></i> تصفح وشراء المحتوى
+                </button>
+            </div>
+            <button onclick="closeModal('verificationModal')" class="modal-btn-cancel" style="margin-top: 8px;">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Payment Select Modal -->
+    <div id="paymentSelectModal" class="modal" onclick="if(event.target === this) closeModal('paymentSelectModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <h3 class="sheet-title">🛒 اختيار وسيلة الدفع</h3>
+                <p class="sheet-subtitle">اختر الطريقة المناسبة لإتمام الشراء</p>
+            </div>
+            
+            <div id="payment-celeb-preview"></div>
+            <div id="payment-methods-grid" class="method-list" style="margin-top: 15px;"></div>
+            
+            <button onclick="closeModal('paymentSelectModal')" class="modal-btn-cancel" style="margin-top: 15px;">إلغاء الأمر</button>
+        </div>
+    </div>
+
+    <!-- Custom Stars Recharge Modal -->
+    <div id="customRechargeModal" class="modal" onclick="if(event.target === this) closeModal('customRechargeModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle"><i class="fas fa-star"></i></div>
+                <h3 class="sheet-title">شحن نجوم تلجرام</h3>
+                <p class="sheet-subtitle">أدخل كمية النجوم لشحن حسابك فوراً</p>
+            </div>
+
+            <div class="modal-input-group">
+                <input type="number" id="custom-recharge-amount" class="modal-input num-font" placeholder="الكمية المطلوبة (مثال: 500)" style="text-align: center; font-size: 1.15rem; font-weight: 700;">
+            </div>
+
+            <button onclick="hapticSuccess(); confirmCustomRecharge();" class="modal-btn-primary">
+                <span>انطلق للشحن عبر البوت</span> ⭐️
+            </button>
+            <button onclick="closeModal('customRechargeModal')" class="modal-btn-cancel">تراجع</button>
+        </div>
+    </div>
+
+    <!-- Like Card Modal -->
+    <div id="likeCardModal" class="modal" onclick="if(event.target === this) closeModal('likeCardModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle"><i class="fas fa-credit-card"></i></div>
+                <h3 class="sheet-title">شحن بطاقة لايك كارد</h3>
+                <p class="sheet-subtitle">قم بتعبئة بيانات البطاقة للمراجعة الفورية</p>
+            </div>
+            
+            <div class="modal-input-group">
+                <select id="likeCardType" class="modal-select">
+                    <option value="" disabled selected>اختر نوع البطاقة</option>
+                    <option value="عالمي">عالمي (Global)</option>
+                    <option value="أمريكي">أمريكي (US)</option>
+                </select>
+            </div>
+
+            <div class="modal-input-group">
+                <select id="likeCardValue" class="modal-select">
+                    <option value="" disabled selected>اختر فئة / قيمة البطاقة</option>
+                    <option value="5">5 دولار ($5)</option>
+                    <option value="10">10 دولار ($10)</option>
+                    <option value="20">20 دولار ($20)</option>
+                    <option value="50">50 دولار ($50)</option>
+                    <option value="100">100 دولار ($100)</option>
+                </select>
+            </div>
+
+            <div class="modal-input-group">
+                <input type="text" id="likeCardCode" class="modal-input num-font" placeholder="أدخل كود البطاقة هنا" style="text-align: center;">
+            </div>
+            
+            <button onclick="hapticSuccess(); submitLikeCard();" class="modal-btn-primary">
+                <i class="fas fa-check-circle"></i> تأكيد وإرسال البطاقة
+            </button>
+            <button onclick="closeModal('likeCardModal')" class="modal-btn-cancel">تراجع</button>
+        </div>
+    </div>
+
+    <!-- Binance Pay Modal -->
+    <div id="binanceModal" class="modal" onclick="if(event.target === this) closeModal('binanceModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle" style="color: #f3ba2f; background: rgba(243, 186, 47, 0.1);"><i class="fab fa-bitcoin"></i></div>
+                <h3 class="sheet-title">الدفع عبر بينانس (Binance Pay)</h3>
+                <p class="sheet-subtitle">أرسل المبلغ إلى المعرف أو امسح الباركود</p>
+            </div>
+            
+            <div id="binanceQrContainer" style="display: none; margin: 0 auto 16px auto; border: 4px solid var(--primary-gold); border-radius: 18px; overflow: hidden; background: #fff; width: 160px; height: 160px;">
+                <img id="binanceQrImg" src="" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px; text-align: center; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">معرف محفظة بينانس (Pay ID)</span>
+                <strong id="binanceWalletDisplay" class="num-font" style="color:#fff; font-size: 1.25rem; letter-spacing: 1px; user-select: all;">جاري التحميل...</strong>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 16px;">
+                <button onclick="hapticTap(); copyBinanceWallet();" style="background: rgba(255,200,55,0.12); border: 1px solid var(--primary-gold); color: var(--primary-gold); padding: 12px; border-radius: 14px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                    <i class="fas fa-copy"></i> نسخ المعرف
+                </button>
+                <a id="binancePayLink" href="#" target="_blank" style="display: none; background: var(--gold-gradient); color: #000; padding: 12px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 0.85rem; flex: 1; align-items: center; justify-content: center; gap: 6px;">
+                    <i class="fas fa-arrow-up-right-from-square"></i> فتح التطبيق
+                </a>
+            </div>
+
+            <div class="modal-input-group">
+                <input type="text" id="binanceProof" class="modal-input num-font" placeholder="رقم العملية / معرف الإثبات (TxID)" style="text-align: center;">
+            </div>
+            
+            <button onclick="hapticSuccess(); submitBinanceProof();" class="modal-btn-primary">
+                <i class="fas fa-paper-plane"></i> تأكيد عملية الدفع
+            </button>
+            <button onclick="closeModal('binanceModal')" class="modal-btn-cancel">تراجع</button>
+        </div>
+    </div>
+
+    <!-- Generic Card / Manual Payment Modal -->
+    <div id="genericCardModal" class="modal" onclick="if(event.target === this) closeModal('genericCardModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle"><i class="fas fa-money-check-dollar"></i></div>
+                <h3 id="genericModalTitle" class="sheet-title">شحن يدوي</h3>
+                <p id="genericModalInstructions" class="sheet-subtitle" style="white-space: pre-wrap; line-height: 1.5;"></p>
+            </div>
+
+            <div class="modal-input-group">
+                <select id="genericCardValue" class="modal-select">
+                    <option value="" disabled selected>اختر قيمة الحوالة / الكرت</option>
+                    <option value="5">5 دولار ($5)</option>
+                    <option value="10">10 دولار ($10)</option>
+                    <option value="20">20 دولار ($20)</option>
+                    <option value="50">50 دولار ($50)</option>
+                    <option value="100">100 دولار ($100)</option>
+                </select>
+            </div>
+
+            <div class="modal-input-group">
+                <input type="text" id="genericCardCode" class="modal-input num-font" placeholder="أدخل كود الشحن أو رقم الإشعار" style="text-align: center;">
+            </div>
+            
+            <button onclick="hapticSuccess(); submitGenericCard();" class="modal-btn-primary">
+                <i class="fas fa-paper-plane"></i> إرسال البيانات للمراجعة
+            </button>
+            <button onclick="closeModal('genericCardModal')" class="modal-btn-cancel">تراجع</button>
+        </div>
+    </div>
+
+    <!-- Order Content Modal (فتح المحتوى المكتمل) -->
+    <div id="orderContentModal" class="modal" onclick="if(event.target === this) closeModal('orderContentModal')">
+        <div class="modal-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="sheet-icon-header">
+                <div class="sheet-icon-circle" style="color: var(--primary-gold); background: rgba(255, 200, 55, 0.15); border: 1px solid var(--gold-border);">
+                    <i class="fas fa-unlock-keyhole"></i>
+                </div>
+                <h3 class="sheet-title" id="orderContentModalTitle">فتح المحتوى الحصري</h3>
+                <p class="sheet-subtitle" id="orderContentModalSubtitle">تم تأكيد طلبك بنجاح! اضغط بالأسفل للوصول إلى المحتوى</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 18px; padding: 16px; margin-bottom: 16px; text-align: right;">
+                <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 4px;">المحتوى / المشهورة:</div>
+                <div id="orderContentCelebName" style="color: #fff; font-weight: 700; font-size: 1.05rem; margin-bottom: 10px;">-</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 8px 12px;">
+                    <span style="color: #34d399; font-size: 0.8rem; font-weight: 600;">✅ حالة الطلب: مكتمل ومقبول</span>
+                    <span id="orderContentPriceBadge" class="num-font" style="color: var(--primary-gold); font-weight: 800; font-size: 0.9rem;"></span>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
+                <button id="orderContentOpenBtn" type="button" class="modal-btn-primary" style="background: linear-gradient(135deg, #ffc837 0%, #ff8008 100%); font-size: 0.98rem; color: #0d0f17; font-weight: 800;">
+                    <i class="fas fa-play-circle"></i> الدخول إلى رابط القناة / المحتوى
+                </button>
+                <button id="orderContentCopyBtn" type="button" class="btn-ghost" style="border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px; font-weight: 600; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; background: rgba(255,255,255,0.04);">
+                    <i class="fas fa-copy" style="color: var(--primary-gold);"></i> نسخ رابط المحتوى
+                </button>
+            </div>
+
+            <p style="text-align: center; font-size: 0.72rem; color: var(--text-dim); line-height: 1.4; margin: 0 0 10px 0;">
+                💡 يتم فتح الرابط تلقائياً في تليجرام أو المتصفح. يمكنك العودة والضغط على "فتح المحتوى" في أي وقت.
+            </p>
+
+            <button onclick="closeModal('orderContentModal')" class="modal-btn-cancel">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        if (typeof firebaseConfig === 'undefined') {
+            window.firebaseConfig = {
+                apiKey: "",
+                authDomain: "",
+                projectId: "",
+                storageBucket: "",
+                messagingSenderId: "",
+                appId: "",
+                measurementId: ""
+            };
+        }
+
+        const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+        let db;
+        let selectedCelebrity = null;
+        let starPricePerDollar = 50;
+        let celebsCache = [];
+        let currentUserBalance = 0;
+        let isUserVerified = false;
+        let supportUrl = 'https://t.me/';
+        let inviteUrl = 'https://t.me/';
+
+        // Haptic Feedback Helpers
+        function hapticTap() {
+            if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+        }
+        function hapticSuccess() {
+            if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+        }
+        function hapticError() {
+            if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+        }
+
+        // Sleek Toast System
+        function showToast(msg, icon = 'fa-circle-check') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast-msg';
+            toast.innerHTML = `<i class="fas ${icon}" style="color:var(--primary-gold); font-size:1.1rem;"></i><span>${msg}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        function updateVerificationUI() {
+            const avatarBadge = document.getElementById('avatar-vip-badge');
+            const tierBadge = document.getElementById('user-tier-badge');
+            const balanceVerBadge = document.getElementById('balance-ver-badge');
+            const banner = document.getElementById('verification-banner');
+            const modalTitle = document.getElementById('ver-modal-title');
+            const modalSubtitle = document.getElementById('ver-modal-subtitle');
+            const modalIconCircle = document.getElementById('ver-modal-icon-circle');
+            const modalActions = document.getElementById('ver-modal-actions');
+
+            if (isUserVerified) {
+                // Verified State
+                if (avatarBadge) avatarBadge.className = 'vip-badge-icon';
+                if (tierBadge) {
+                    tierBadge.innerHTML = 'VIP موثق 👑';
+                    tierBadge.style.color = 'var(--primary-gold)';
+                }
+                if (balanceVerBadge) {
+                    balanceVerBadge.className = 'balance-vip-pill verified';
+                    balanceVerBadge.innerHTML = '<i class="fas fa-circle-check"></i> <span>حساب موثق</span>';
+                }
+                if (banner) banner.style.display = 'none';
+
+                if (modalTitle) modalTitle.innerText = 'حسابك موثق بنجاح 👑';
+                if (modalSubtitle) modalSubtitle.innerHTML = 'حالة الحساب: <span style="color:#34d399; font-weight:700;">موثق بالكامل ✅</span>';
+                if (modalIconCircle) {
+                    modalIconCircle.style.background = 'rgba(16, 185, 129, 0.15)';
+                    modalIconCircle.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+                    modalIconCircle.style.color = '#10b981';
+                    modalIconCircle.innerHTML = '<i class="fas fa-circle-check"></i>';
+                }
+                if (modalActions) {
+                    modalActions.innerHTML = `
+                        <div style="background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); border-radius:14px; padding:12px; text-align:center; color:#34d399; font-size:0.85rem; font-weight:700; margin-bottom:10px;">
+                            🎉 مبروك! تتمتع بجميع ميزات الخصومات والتحديثات المجانية الدائمة.
+                        </div>
+                    `;
+                }
+            } else {
+                // Unverified State
+                if (avatarBadge) avatarBadge.className = 'vip-badge-icon unverified';
+                if (tierBadge) {
+                    tierBadge.innerHTML = 'غير موثق ⚠️';
+                    tierBadge.style.color = 'var(--text-muted)';
+                }
+                if (balanceVerBadge) {
+                    balanceVerBadge.className = 'balance-vip-pill unverified';
+                    balanceVerBadge.innerHTML = '<i class="fas fa-shield-halved"></i> <span>غير موثق (توثيق)</span>';
+                }
+                if (banner) banner.style.display = 'flex';
+
+                if (modalTitle) modalTitle.innerText = 'توثيق الحساب الملكي (VIP)';
+                if (modalSubtitle) modalSubtitle.innerHTML = 'حالة الحساب: <span style="color:var(--primary-gold); font-weight:700;">غير موثق ⚠️</span>';
+                if (modalIconCircle) {
+                    modalIconCircle.style.background = 'rgba(255, 200, 55, 0.12)';
+                    modalIconCircle.style.borderColor = 'rgba(255, 200, 55, 0.25)';
+                    modalIconCircle.style.color = 'var(--primary-gold)';
+                    modalIconCircle.innerHTML = '<i class="fas fa-shield-halved"></i>';
+                }
+            }
+        }
+
+        window.openVerificationModal = () => {
+            hapticTap();
+            openModal('verificationModal');
+        };
+
+        function startApp() {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            
+            if(tg) {
+                tg.expand();
+                tg.ready();
+                
+                if (tg.setHeaderColor) tg.setHeaderColor('#08090d');
+                if (tg.setBackgroundColor) tg.setBackgroundColor('#08090d');
+
+                const user = tg.initDataUnsafe?.user;
+                if(user) {
+                    const fullName = ((user.first_name || '') + " " + (user.last_name || '')).trim() || 'عضو مميز';
+                    document.getElementById('user-full-name').textContent = fullName;
+                    if(user.photo_url) document.getElementById('user-avatar').src = user.photo_url;
+
+                    db.collection('users').doc(user.id.toString()).set({
+                        name: user.first_name || 'مشترك',
+                        username: user.username || '',
+                        last_seen: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+
+                    // تسجيل آخر تواجد للمستخدم في Firestore بأمان
+                    const notifKey = 'notified_entry_' + user.id;
+                    if (!sessionStorage.getItem(notifKey)) {
+                        sessionStorage.setItem(notifKey, '1');
+                    }
+
+                    listenUserData(user.id);
+                    loadUserOrders(user.id);
+                }
+            }
+            loadCelebs();
+            fetchSettings();
+            loadPaymentMethods();
+            updateVerificationUI();
+        }
+
+        function fetchSettings() {
+            db.collection('settings').doc('global').onSnapshot(doc => {
+                if (!doc.exists) return;
+                const s = doc.data();
+
+                if (s.star_price && s.star_price > 0) {
+                    starPricePerDollar = s.star_price;
+                    renderCelebs();
+                    updateBalanceDisplay();
+                }
+
+                if (s.support_url) supportUrl = s.support_url;
+                if (s.invite_url) {
+                    inviteUrl = s.invite_url;
+                    const inviteBtn = document.getElementById('nav-invite');
+                    if (inviteBtn) inviteBtn.setAttribute('data-url', s.invite_url);
+                }
+
+                if (s.binance_wallet) {
+                    const walletDisp = document.getElementById('binanceWalletDisplay');
+                    if(walletDisp) walletDisp.innerText = s.binance_wallet;
+                }
+                
+                const payLink = document.getElementById('binancePayLink');
+                if (payLink) {
+                    if (s.binance_url && s.binance_url.trim() !== '') {
+                        payLink.href = s.binance_url;
+                        payLink.style.display = 'flex';
+                    } else {
+                        payLink.style.display = 'none';
+                    }
+                }
+
+                const qrContainer = document.getElementById('binanceQrContainer');
+                const qrImg = document.getElementById('binanceQrImg');
+                if (qrContainer && qrImg) {
+                    if (s.binance_qr && s.binance_qr.trim() !== '') {
+                        qrImg.src = s.binance_qr;
+                        qrContainer.style.display = 'block';
+                    } else {
+                        qrContainer.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        window.triggerSupport = () => {
+            hapticTap();
+            window.open(supportUrl, '_blank');
+        };
+
+        window.triggerInvite = () => {
+            hapticTap();
+            window.open(inviteUrl, '_blank');
+        };
+
+        function loadPaymentMethods() {
+            const list = document.getElementById('deposit-methods');
+            db.collection('payment_methods').onSnapshot(snap => {
+                list.innerHTML = '';
+                
+                // Telegram Stars Item
+                const starsDiv = document.createElement('div');
+                starsDiv.className = 'method-item';
+                starsDiv.onclick = () => { hapticTap(); openModal('customRechargeModal'); };
+                starsDiv.innerHTML = `
+                    <div class="method-left">
+                        <div class="method-icon-box">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="method-info">
+                            <strong>Telegram Stars</strong>
+                            <span>شحن فوري ومباشر بنجوم تلجرام</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left method-arrow"></i>`;
+                list.appendChild(starsDiv);
+
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    let icon = 'fa-wallet';
+                    let type = data.type || 'manual';
+
+                    const div = document.createElement('div');
+                    div.className = 'method-item';
+                    
+                    div.addEventListener('click', () => {
+                        hapticTap();
+                        if(type === 'likecard') {
+                            openModal('likeCardModal');
+                        } else if(type === 'binance') {
+                            openModal('binanceModal');
+                        } else if(type === 'stars') {
+                            openModal('customRechargeModal');
+                        } else if(type === 'manual') {
+                            openGenericCardModal(data.name, data.instructions || '');
+                        } else {
+                            showPaymentInstructions(data.name, data.instructions || '');
+                        }
+                    });
+
+                    if(type === 'likecard') icon = 'fa-credit-card';
+                    else if(type === 'binance') icon = 'fa-bitcoin';
+                    else if(type === 'stars') return;
+                    else if(type === 'manual') icon = 'fa-money-bill-wave';
+
+                    div.innerHTML = `
+                        <div class="method-left">
+                            <div class="method-icon-box">
+                                <i class="fas ${icon}"></i>
+                            </div>
+                            <div class="method-info">
+                                <strong>${data.name}</strong>
+                                <span>${type === 'manual' ? 'شحن فوري عن طريق إرسال كود' : 'وسيلة إيداع ودفع آمنة'}</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-left method-arrow"></i>
+                    `;
+                    list.appendChild(div);
+                });
+            });
+        }
+
+        window.showPaymentInstructions = (name, instructions) => {
+            if(tg) tg.showAlert(`طريقة الدفع [ ${name} ]:\n\n${instructions}`);
+            else showToast(`${name}: ${instructions}`, 'fa-circle-info');
+        };
+
+        function updateBalanceDisplay() {
+            const usdVal = (currentUserBalance / starPricePerDollar).toFixed(2);
+            document.getElementById('balance').innerText = usdVal;
+        }
+
+        function listenUserData(id) {
+            let approvedOrdersCount = 0;
+            let approvedRechargesCount = 0;
+            let userExplicitVerified = false;
+
+            const checkAndSetVerified = () => {
+                const wasVerified = isUserVerified;
+                isUserVerified = userExplicitVerified || approvedOrdersCount > 0 || approvedRechargesCount > 0;
+                updateVerificationUI();
+                if (!wasVerified && isUserVerified) {
+                    showToast('🎉 تهانينا! أصبح حسابك الآن موثقاً رسمياً (VIP)!', 'fa-crown');
+                }
+            };
+
+            // 1. User doc listener
+            db.collection('users').doc(id.toString()).onSnapshot(doc => {
+                if(doc.exists) {
+                    const data = doc.data();
+                    currentUserBalance = data.balance || 0;
+                    userExplicitVerified = data.verified === true || data.is_verified === true;
+                    updateBalanceDisplay();
+                    checkAndSetVerified();
+                }
+            });
+
+            // 2. Orders listener (approved purchases)
+            db.collection('orders').where('user_id', '==', id.toString()).onSnapshot(snap => {
+                approvedOrdersCount = snap.docs.filter(d => d.data().status === 'approved').length;
+                document.getElementById('order-count').innerText = approvedOrdersCount;
+                let total = 0;
+                snap.forEach(d => { if(d.data().status === 'approved') total += (d.data().price || 0); });
+                document.getElementById('total-purchases').innerText = total.toFixed(2);
+                checkAndSetVerified();
+            });
+
+            // 3. Recharge listener (approved deposits)
+            db.collection('code_recharges').where('user_id', '==', id.toString()).onSnapshot(snap => {
+                approvedRechargesCount = snap.docs.filter(d => d.data().status === 'approved').length;
+                checkAndSetVerified();
+            });
+        }
+
+        let userOrdersMap = new Map();
+        let userRechargesMap = new Map();
+
+        function renderUserOrdersList() {
+            const list = document.getElementById('client-orders-list');
+            if (!list) return;
+            list.innerHTML = '';
+            const all = [
+                ...Array.from(userOrdersMap.values()),
+                ...Array.from(userRechargesMap.values())
+            ];
+            
+            all.sort((a,b) => (b.created_at?.seconds || 0) - (a.created_at?.seconds || 0));
+
+            if(all.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; color: var(--text-dim); padding: 50px 20px;">
+                        <i class="fas fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4;"></i>
+                        <p>لا توجد طلبات سابقة حتى الآن 📁</p>
+                    </div>`;
+                return;
+            }
+
+            all.forEach(item => {
+                let statusClass = 'order-status-pending';
+                let statusText = '⏳ قيد المعالجة';
+                
+                if(item.status === 'approved') {
+                    statusClass = 'order-status-approved';
+                    statusText = '✅ مكتمل ومقبول';
+                } else if(item.status === 'rejected') {
+                    statusClass = 'order-status-rejected';
+                    statusText = '❌ مرفوض';
+                }
+                
+                const title = item.type === 'order' ? `شراء: ${item.celebrity_name}` : `إيداع: ${item.payment_method}`;
+                const amount = item.price || item.expected_amount || item.added_amount || 0;
+                
+                let reasonHtml = '';
+                if(item.status === 'rejected' && item.rejection_reason) {
+                    reasonHtml = `<div class="order-reject-reason">سبب الرفض: ${item.rejection_reason}</div>`;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'order-card';
+
+                let contentActionHtml = '';
+                if(item.type === 'order' && item.status === 'approved') {
+                    card.classList.add('order-card-completed');
+                    const orderIdEsc = item.id || '';
+                    const celebIdEsc = item.celebrity_id || '';
+                    const celebNameEsc = encodeURIComponent(item.celebrity_name || '');
+                    const fileLinkEsc = encodeURIComponent(item.file_link || '');
+                    
+                    contentActionHtml = `
+                        <div class="order-content-footer">
+                            <button class="btn-open-content" type="button" onclick="event.stopPropagation(); triggerOpenOrderContent('${orderIdEsc}', '${celebIdEsc}', '${celebNameEsc}', '${fileLinkEsc}', '${amount}');">
+                                <i class="fas fa-unlock-alt"></i>
+                                <span>فتح المحتوى</span>
+                                <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.75rem; margin-right: 4px;"></i>
+                            </button>
+                        </div>
+                    `;
+
+                    card.onclick = () => {
+                        triggerOpenOrderContent(orderIdEsc, celebIdEsc, celebNameEsc, fileLinkEsc, amount);
+                    };
+                }
+
+                card.innerHTML = `
+                    <div class="order-card-header">
+                        <span class="order-card-title">${title}</span>
+                        <span class="order-card-price num-font">$${amount}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="order-status-badge ${statusClass}">${statusText}</div>
+                        <span style="font-size: 0.68rem; color: var(--text-dim);">#${item.type === 'order' ? 'ORDER' : 'RECHARGE'}</span>
+                    </div>
+                    ${reasonHtml}
+                    ${contentActionHtml}
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function loadUserOrders(id) {
+            db.collection('orders').where('user_id', '==', id.toString()).onSnapshot(snapOrders => {
+                userOrdersMap.clear();
+                snapOrders.forEach(doc => userOrdersMap.set(doc.id, { id: doc.id, ...doc.data(), type: 'order' }));
+                renderUserOrdersList();
+            }, err => console.warn("Orders listener error:", err));
+
+            db.collection('code_recharges').where('user_id', '==', id.toString()).onSnapshot(snapRecharge => {
+                userRechargesMap.clear();
+                snapRecharge.forEach(doc => userRechargesMap.set(doc.id, { id: doc.id, ...doc.data(), type: 'recharge' }));
+                renderUserOrdersList();
+            }, err => console.warn("Recharges listener error:", err));
+        }
+
+        window.triggerOpenOrderContent = async function(orderId, celebId, celebNameEncoded, directLinkEncoded, amount) {
+            hapticSuccess();
+            let link = directLinkEncoded ? decodeURIComponent(directLinkEncoded).trim() : '';
+            const celebName = celebNameEncoded ? decodeURIComponent(celebNameEncoded).trim() : 'المحتوى';
+
+            // 1. Resolve from cache if not directly in order
+            if (!link && celebId) {
+                const c = (celebsCache || []).find(x => x.id === celebId);
+                if (c && c.file_link) link = c.file_link.trim();
+            }
+            if (!link && celebName) {
+                const c = (celebsCache || []).find(x => x.name && x.name.trim() === celebName);
+                if (c && c.file_link) link = c.file_link.trim();
+            }
+
+            // 2. Resolve from Firestore if not yet cached
+            if (!link) {
+                showToast('جاري استدعاء رابط المحتوى... ⏳');
+                try {
+                    if (orderId) {
+                        const oDoc = await db.collection('orders').doc(orderId).get();
+                        if (oDoc.exists && oDoc.data().file_link) link = oDoc.data().file_link.trim();
+                    }
+                    if (!link && celebId) {
+                        const cDoc = await db.collection('celebrities').doc(celebId).get();
+                        if (cDoc.exists && cDoc.data().file_link) link = cDoc.data().file_link.trim();
+                    }
+                } catch(e) {
+                    console.error('Error fetching content link:', e);
+                }
+            }
+
+            // Set modal info
+            const nameEl = document.getElementById('orderContentCelebName');
+            if (nameEl) nameEl.innerText = celebName;
+            const priceEl = document.getElementById('orderContentPriceBadge');
+            if (priceEl) priceEl.innerText = amount ? `$${amount}` : '';
+
+            const openBtn = document.getElementById('orderContentOpenBtn');
+            const copyBtn = document.getElementById('orderContentCopyBtn');
+
+            if (!link) {
+                if (tg && tg.showAlert) {
+                    tg.showAlert('⚠️ رابط المحتوى قيد التجهيز من قبل الإدارة، يرجى مراجعة الدعم أو المحاولة بعد قليل.');
+                } else {
+                    showToast('⚠️ رابط المحتوى قيد التجهيز من الإدارة');
+                }
+                return;
+            }
+
+            if (openBtn) {
+                openBtn.onclick = () => executeOpenContentLink(link);
+            }
+
+            if (copyBtn) {
+                copyBtn.onclick = () => {
+                    hapticTap();
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(link).then(() => {
+                            showToast('✅ تم نسخ رابط المحتوى بنجاح! 📋');
+                        }).catch(() => {
+                            prompt('انسخ الرابط:', link);
+                        });
+                    } else {
+                        prompt('انسخ الرابط:', link);
+                    }
+                };
+            }
+
+            // Show modal
+            openModal('orderContentModal');
+
+            // Automatically open link
+            setTimeout(() => {
+                executeOpenContentLink(link);
+            }, 300);
+        };
+
+        window.executeOpenContentLink = function(url) {
+            if (!url) return;
+            hapticTap();
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tgApp = window.Telegram.WebApp;
+                if (url.includes('t.me/') && tgApp.openTelegramLink) {
+                    tgApp.openTelegramLink(url);
+                    return;
+                }
+                if (tgApp.openLink) {
+                    tgApp.openLink(url);
+                    return;
+                }
+            }
+            window.open(url, '_blank');
+        };
+
+        function renderCelebs(filterText = '') {
+            const grid = document.getElementById('celebrity-grid');
+            grid.innerHTML = '';
+            
+            const filtered = celebsCache.filter(item => {
+                if (!filterText) return true;
+                return (item.name || '').toLowerCase().includes(filterText.toLowerCase());
+            });
+
+            document.getElementById('celebs-total-count').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; color: var(--text-dim); padding: 40px 10px;">
+                        <i class="fas fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.4;"></i>
+                        <p style="font-size: 0.85rem;">لا توجد نتائج مطابقة للبحث</p>
+                    </div>`;
+                return;
+            }
+
+            filtered.forEach(data => {
+                const starEquiv = Math.round(data.price_usd * starPricePerDollar);
+                const card = document.createElement('div');
+                card.className = 'celeb-card';
+                card.onclick = () => {
+                    hapticTap();
+                    openPaymentSelector(data.id, data.name, data.price_usd, data.image_url);
+                };
+                card.innerHTML = `
+                    <div class="celeb-img-box">
+                        <img src="${data.image_url}" class="celeb-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'">
+                        <div class="celeb-badge-vip"><i class="fas fa-crown"></i> VIP</div>
+                        <div class="celeb-overlay"></div>
+                        <div class="celeb-details">
+                            <div class="celeb-title">${data.name}</div>
+                            <div class="celeb-price-bar">
+                                <span class="celeb-price-usd num-font">$${data.price_usd}</span>
+                                <span class="celeb-price-stars num-font">${starEquiv} ⭐</span>
+                            </div>
+                        </div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        window.filterCelebs = (val) => {
+            renderCelebs(val);
+        };
+
+        function loadCelebs() {
+            db.collection('celebrities').onSnapshot(snap => {
+                celebsCache = [];
+                snap.forEach(doc => celebsCache.push({ id: doc.id, ...doc.data() }));
+                celebsCache.sort((a,b) => (b.created_at?.seconds || 0) - (a.created_at?.seconds || 0));
+                renderCelebs();
+
+                // Auto-open requested package if passed via URL parameter (e.g. checkout.html?celeb=...)
+                try {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const celebParam = urlParams.get('celeb');
+                    if (celebParam && !window._celebAutoTriggered) {
+                        window._celebAutoTriggered = true;
+                        const match = (celebsCache || []).find(c => c.id === celebParam || (c.name && c.name.toLowerCase().includes(celebParam.toLowerCase())));
+                        if (match) {
+                            openPaymentSelector(match.id, match.name, match.price_usd, match.image_url);
+                        }
+                    }
+                } catch(e) {}
+            }, err => {
+                console.error("❌ خطأ قراءة المحتوى والمشاهير من Firestore:", err);
+            });
+        }
+
+        window.openPaymentSelector = async (id, name, price, imageUrl) => {
+            const foundCeleb = (celebsCache || []).find(c => c.id === id);
+            selectedCelebrity = { 
+                id, 
+                name, 
+                price, 
+                imageUrl,
+                file_link: foundCeleb?.file_link || ''
+            };
+            const grid = document.getElementById('payment-methods-grid');
+            grid.innerHTML = '<p style="text-align:center; padding:20px; color:var(--text-muted);">جاري تجهيز خيارات الشراء... ⏳</p>';
+            
+            const starPrice = Math.round(price * starPricePerDollar);
+
+            const celebPreview = document.getElementById('payment-celeb-preview');
+            if (celebPreview) {
+                celebPreview.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,200,55,0.06); border: 1px solid var(--gold-border); border-radius: 18px; padding: 12px; margin-bottom: 15px;">
+                        <img src="${imageUrl || ''}" onerror="this.style.display='none'" style="width: 58px; height: 68px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary-gold);">
+                        <div style="text-align: right; flex: 1;">
+                            <strong style="display:block; font-size: 0.95rem; color:#fff; margin-bottom: 4px;">${name}</strong>
+                            <div style="display:flex; align-items:center; gap: 10px;">
+                                <span class="num-font" style="color: var(--primary-gold); font-weight: 800; font-size: 1.15rem;">$${price}</span>
+                                <span class="num-font" style="color: var(--text-muted); font-size: 0.75rem;">(${starPrice} ⭐ نجمة)</span>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            try {
+                const snap = await db.collection('payment_methods').get();
+                grid.innerHTML = '';
+
+                // 1. Pay with user balance
+                const balanceVal = parseFloat(document.getElementById('balance').innerText) || 0;
+                if(balanceVal >= price) {
+                    const balanceBtn = document.createElement('div');
+                    balanceBtn.className = 'method-item';
+                    balanceBtn.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+                    balanceBtn.onclick = () => { hapticSuccess(); purchaseWithBalance(price); };
+                    balanceBtn.innerHTML = `
+                        <div class="method-left">
+                            <div class="method-icon-box" style="background:rgba(16,185,129,0.12); color:#10b981; border-color:rgba(16,185,129,0.25);">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="method-info">
+                                <strong>الشراء من الرصيد المتاح</strong>
+                                <span style="color:#34d399;">رصيدك كافٍ (${balanceVal})</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-circle-check" style="color:#10b981; font-size:1.1rem;"></i>`;
+                    grid.appendChild(balanceBtn);
+                }
+
+                // 2. Pay directly with Telegram Stars
+                const starBtn = document.createElement('div');
+                starBtn.className = 'method-item';
+                starBtn.onclick = () => { hapticSuccess(); purchaseContent(starPrice); };
+                starBtn.innerHTML = `
+                    <div class="method-left">
+                        <div class="method-icon-box">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="method-info">
+                            <strong>الدفع بالنجوم (${starPrice} ⭐)</strong>
+                            <span>دفع فوري وسريع عبر تلجرام</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left method-arrow"></i>`;
+                grid.appendChild(starBtn);
+
+                // 3. Other configured methods
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    if(data.type === 'stars') return;
+
+                    const btn = document.createElement('div');
+                    btn.className = 'method-item';
+                    
+                    let icon = 'fa-wallet';
+                    if(data.type === 'binance') icon = 'fa-bitcoin';
+                    else if(data.type === 'likecard') icon = 'fa-credit-card';
+                    else if(data.type === 'manual') icon = 'fa-money-bill-wave';
+
+                    btn.onclick = () => {
+                        hapticTap();
+                        closeModal('paymentSelectModal');
+                        if(data.type === 'binance') openModal('binanceModal');
+                        else if(data.type === 'likecard') openModal('likeCardModal');
+                        else if(data.type === 'manual') openGenericCardModal(data.name, data.instructions || '');
+                        else showPaymentInstructions(data.name, data.instructions || '');
+                    };
+
+                    btn.innerHTML = `
+                        <div class="method-left">
+                            <div class="method-icon-box">
+                                <i class="fas ${icon}"></i>
+                            </div>
+                            <div class="method-info">
+                                <strong>${data.name}</strong>
+                                <span>شحن ثم إتمام الشراء</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-left method-arrow"></i>`;
+                    grid.appendChild(btn);
+                });
+            } catch(e) {
+                console.error('Error fetching payment methods:', e);
+                grid.innerHTML = '<p style="text-align:center; padding:15px; color:var(--danger);">تعذر تحميل خيارات الدفع، يرجى المحاولة ثانية</p>';
+            }
+
+            openModal('paymentSelectModal');
+        };
+
+        function getActiveUser() {
+            return (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user : null;
+        }
+
+        // ============================================================
+        // ✅ نظام الحماية من تكرار الطلبات (Idempotency Guard)
+        // ============================================================
+        const _processingLocks = new Set(); // قفل لمنع الطلبات المتزامنة
+
+        function acquireLock(key) {
+            if (_processingLocks.has(key)) return false; // مقفل بالفعل
+            _processingLocks.add(key);
+            return true;
+        }
+        function releaseLock(key) {
+            _processingLocks.delete(key);
+        }
+
+        window.purchaseWithBalance = async (price) => {
+            const user = getActiveUser();
+            if (!user || !user.id) return alert('يرجى الشراء من خلال تطبيق تليجرام');
+            const userId = user.id.toString();
+            const lockKey = `balance_${userId}_${selectedCelebrity?.id}`;
+
+            // ✅ منع النقر المزدوج
+            if (!acquireLock(lockKey)) {
+                hapticError();
+                return showToast('⏳ جارٍ معالجة طلبك، انتظر لحظة...');
+            }
+
+            try {
+                // ✅ التحقق من عدم وجود طلب سابق مكتمل لنفس المنتج
+                const existingOrder = await db.collection('orders')
+                    .where('user_id', '==', userId)
+                    .where('celebrity_id', '==', selectedCelebrity.id)
+                    .where('status', '==', 'approved')
+                    .limit(1)
+                    .get();
+
+                if (!existingOrder.empty) {
+                    hapticError();
+                    releaseLock(lockKey);
+                    return tg?.showAlert
+                        ? tg.showAlert('لقد قمت بشراء هذا المحتوى مسبقاً ✅')
+                        : alert('لقد قمت بشراء هذا المحتوى مسبقاً ✅');
+                }
+
+                const userDoc = await db.collection('users').doc(userId).get();
+                const currentBalance = userDoc.data()?.balance || 0;
+                const costInStars = Math.round(price * starPricePerDollar);
+
+                if (currentBalance < costInStars) {
+                    hapticError();
+                    releaseLock(lockKey);
+                    return tg?.showAlert
+                        ? tg.showAlert('عذراً، رصيدك غير كافٍ لهذا الطلب ❌')
+                        : alert('عذراً، رصيدك غير كافٍ لهذا الطلب ❌');
+                }
+
+                await db.collection('users').doc(userId).update({
+                    balance: firebase.firestore.FieldValue.increment(-costInStars),
+                    is_verified: true
+                });
+
+                await db.collection('orders').add({
+                    user_id: userId,
+                    user_name: user.first_name || 'مشترك',
+                    celebrity_name: selectedCelebrity.name,
+                    celebrity_id: selectedCelebrity.id,
+                    file_link: selectedCelebrity.file_link || '',
+                    price: price,
+                    stars_paid: costInStars,
+                    status: 'approved',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                hapticSuccess();
+                showToast('✅ تم شراء المحتوى بنجاح وتوثيق حسابك!');
+                closeModal('paymentSelectModal');
+            } catch (err) {
+                console.error('purchaseWithBalance error:', err);
+                showToast('حدث خطأ أثناء إتمام الشراء، حاول ثانية', 'fa-triangle-exclamation');
+            } finally {
+                releaseLock(lockKey); // ✅ دائماً نحرر القفل
+            }
+        };
+
+        window.purchaseContent = async (price) => {
+            const user = getActiveUser();
+            if (!user || !user.id) return alert('يرجى الشراء من خلال تطبيق تليجرام');
+            const userId = user.id.toString();
+            const lockKey = `stars_purchase_${userId}_${selectedCelebrity?.id}`;
+
+            // ✅ منع النقر المزدوج
+            if (!acquireLock(lockKey)) {
+                hapticError();
+                return showToast('⏳ جارٍ إرسال الطلب، انتظر لحظة...');
+            }
+
+            try {
+                // ✅ التحقق من عدم وجود فاتورة معلقة لنفس المستخدم ونفس المنتج
+                const existingPending = await db.collection('stars_purchase')
+                    .where('user_id', '==', userId)
+                    .where('celebrity_id', '==', selectedCelebrity.id)
+                    .where('status', 'in', ['pending', 'sent'])
+                    .limit(1)
+                    .get();
+
+                if (!existingPending.empty) {
+                    releaseLock(lockKey);
+                    showToast('⭐ تم إرسال فاتورة من قبل — تحقق من محادثة البوت!');
+                    closeModal('paymentSelectModal');
+                    setTimeout(() => { if (tg && tg.close) tg.close(); }, 1500);
+                    return;
+                }
+
+                // ✅ التحقق من عدم وجود طلب مكتمل مسبقاً
+                const existingOrder = await db.collection('orders')
+                    .where('user_id', '==', userId)
+                    .where('celebrity_id', '==', selectedCelebrity.id)
+                    .where('status', '==', 'approved')
+                    .limit(1)
+                    .get();
+
+                if (!existingOrder.empty) {
+                    hapticError();
+                    releaseLock(lockKey);
+                    return tg?.showAlert
+                        ? tg.showAlert('لقد قمت بشراء هذا المحتوى مسبقاً ✅')
+                        : alert('لقد قمت بشراء هذا المحتوى مسبقاً ✅');
+                }
+
+                await db.collection('stars_purchase').add({
+                    user_id: userId,
+                    amount: price,
+                    celebrity_name: selectedCelebrity.name,
+                    celebrity_id: selectedCelebrity.id,
+                    file_link: selectedCelebrity.file_link || '',
+                    status: 'pending',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                hapticSuccess();
+                showToast('تم إرسال الطلب! دفع النجوم سيتم عبر البوت ⭐️');
+                closeModal('paymentSelectModal');
+                setTimeout(() => { if (tg && tg.close) tg.close(); }, 1200);
+            } catch (err) {
+                console.error('purchaseContent error:', err);
+                showToast('تعذر إرسال طلب الشراء، يرجى المحاولة ثانية', 'fa-triangle-exclamation');
+            } finally {
+                releaseLock(lockKey); // ✅ دائماً نحرر القفل
+            }
+        };
+
+
+        window.initiateStarsRecharge = async (amount) => {
+            const user = getActiveUser();
+            if (!user || !user.id) return alert('يرجى الشحن من خلال تطبيق تليجرام');
+            const userId = user.id.toString();
+            const lockKey = `recharge_${userId}_${amount}`;
+
+            // ✅ منع النقر المزدوج
+            if (!acquireLock(lockKey)) {
+                hapticError();
+                return showToast('⏳ جارٍ إرسال طلب الشحن، انتظر لحظة...');
+            }
+
+            try {
+                // ✅ التحقق من وجود طلب شحن معلق لنفس المستخدم
+                const existingPending = await db.collection('stars_recharge')
+                    .where('user_id', '==', userId)
+                    .where('status', 'in', ['pending', 'sent'])
+                    .limit(1)
+                    .get();
+
+                if (!existingPending.empty) {
+                    releaseLock(lockKey);
+                    showToast('⭐ فاتورة شحن مُرسلة بالفعل — تحقق من محادثة البوت!');
+                    setTimeout(() => { if (tg && tg.close) tg.close(); }, 1500);
+                    return;
+                }
+
+                await db.collection('stars_recharge').add({
+                    user_id: userId,
+                    amount: amount,
+                    status: 'pending',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                hapticSuccess();
+                showToast('فاتورة النجوم قيد الإرسال، سنعود للدردشة ⭐️');
+                setTimeout(() => { if (tg && tg.close) tg.close(); }, 1200);
+            } catch (err) {
+                console.error('initiateStarsRecharge error:', err);
+                showToast('تعذر إرسال طلب الشحن، يرجى المحاولة ثانية', 'fa-triangle-exclamation');
+            } finally {
+                releaseLock(lockKey);
+            }
+        };
+
+        window.confirmCustomRecharge = () => {
+            const amountInput = document.getElementById('custom-recharge-amount').value;
+            const amount = parseInt(amountInput);
+            if(isNaN(amount) || amount <= 0) {
+                hapticError();
+                return showToast('يرجى إدخال كمية صحيحة أكبر من الصفر', 'fa-triangle-exclamation');
+            }
+            closeModal('customRechargeModal');
+            initiateStarsRecharge(amount);
+        };
+
+        window.submitLikeCard = async () => {
+            const type = document.getElementById('likeCardType').value;
+            const value = document.getElementById('likeCardValue').value;
+            const code = document.getElementById('likeCardCode').value;
+
+            if(!type) return showToast('الرجاء اختيار نوع البطاقة', 'fa-triangle-exclamation');
+            if(!value) return showToast('الرجاء اختيار قيمة البطاقة', 'fa-triangle-exclamation');
+            if(!code || code.trim() === '') return showToast('الرجاء إدخال كود البطاقة', 'fa-triangle-exclamation');
+            
+            const user = getActiveUser();
+            if(!user || !user.id) return alert('يرجى الشحن عبر تليجرام');
+            
+            try {
+                await db.collection('code_recharges').add({
+                    user_id: user.id.toString(),
+                    user_name: user.first_name || 'يوزر',
+                    payment_method: 'لايك كارد',
+                    card_type: type,
+                    expected_amount: parseFloat(value),
+                    code: code.trim(),
+                    status: 'pending',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('تم إرسال بطاقة لايك كارد للمراجعة بنجاح! 🎫');
+                document.getElementById('likeCardCode').value = '';
+                document.getElementById('likeCardType').value = '';
+                document.getElementById('likeCardValue').value = '';
+                closeModal('likeCardModal');
+            } catch(err) {
+                console.error('submitLikeCard error:', err);
+                showToast('تعذر إرسال البطاقة، حاول ثانية', 'fa-triangle-exclamation');
+            }
+        };
+
+        window.submitBinanceProof = async () => {
+            const proof = document.getElementById('binanceProof').value;
+            if(!proof || proof.trim() === '') return showToast('الرجاء إدخال رقم العملية كإثبات للدفع', 'fa-triangle-exclamation');
+            
+            const user = getActiveUser();
+            if(!user || !user.id) return alert('يرجى الدفع عبر تليجرام');
+
+            try {
+                await db.collection('code_recharges').add({
+                    user_id: user.id.toString(),
+                    user_name: user.first_name || 'يوزر',
+                    payment_method: 'بينانس Pay',
+                    code: proof.trim(),
+                    status: 'pending',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('تم إرسال إثبات الدفع للمراجعة بنجاح! 💸');
+                document.getElementById('binanceProof').value = '';
+                closeModal('binanceModal');
+            } catch(err) {
+                console.error('submitBinanceProof error:', err);
+                showToast('تعذر إرسال الإثبات، حاول ثانية', 'fa-triangle-exclamation');
+            }
+        };
+
+        let currentGenericMethod = '';
+        window.openGenericCardModal = (name, instructions) => {
+            currentGenericMethod = name;
+            document.getElementById('genericModalTitle').innerText = name;
+            document.getElementById('genericModalInstructions').innerText = instructions;
+            openModal('genericCardModal');
+        };
+
+        window.submitGenericCard = async () => {
+            const value = document.getElementById('genericCardValue').value;
+            const code = document.getElementById('genericCardCode').value;
+
+            if(!value) return showToast('الرجاء اختيار القيمة', 'fa-triangle-exclamation');
+            if(!code || code.trim() === '') return showToast('الرجاء إدخال الكود أو رقم الإثبات', 'fa-triangle-exclamation');
+            
+            const user = getActiveUser();
+            if(!user || !user.id) return alert('يرجى الشحن عبر تليجرام');
+            
+            try {
+                await db.collection('code_recharges').add({
+                    user_id: user.id.toString(),
+                    user_name: user.first_name || 'يوزر',
+                    payment_method: currentGenericMethod,
+                    expected_amount: parseFloat(value),
+                    code: code.trim(),
+                    status: 'pending',
+                    created_at: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('تم إرسال الكود للمراجعة بنجاح! 🎫');
+                document.getElementById('genericCardValue').value = '';
+                document.getElementById('genericCardCode').value = '';
+                closeModal('genericCardModal');
+            } catch(err) {
+                console.error('submitGenericCard error:', err);
+                showToast('تعذر إرسال الكود، حاول ثانية', 'fa-triangle-exclamation');
+            }
+        };
+
+        window.copyBinanceWallet = () => {
+            const walletText = document.getElementById('binanceWalletDisplay').innerText;
+            if (walletText) {
+                window.navigator.clipboard.writeText(walletText).then(() => {
+                    showToast('تم نسخ معرف الحساب بنجاح! 📋');
+                });
+            }
+        };
+
+        window.switchMainTab = (tab) => {
+            document.querySelectorAll('.main-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const target = document.getElementById(tab + '-view');
+            if(target) target.classList.add('active');
+            document.getElementById('nav-' + tab)?.classList.add('active');
+        };
+
+        function openModal(id) {
+            hapticTap();
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            hapticTap();
+            document.getElementById(id).classList.remove('active');
+        }
+
+        window.onload = startApp;
+    </script>
+</body>
+</html>
