@@ -50,18 +50,34 @@ try {
     console.error('❌ [Vercel Firestore Init Error]:', e.message);
 }
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const ADMIN_ID = process.env.ADMIN_ID;
-const DEFAULT_STORE_URL = process.env.STORE_URL || 'https://privatespicy.web.app';
+// تصدير المعالج لـ Vercel Serverless
+module.exports = async (req, res) => {
+    const BOT_TOKEN = process.env.BOT_TOKEN;
+    const ADMIN_ID = process.env.ADMIN_ID;
+    const DEFAULT_STORE_URL = process.env.STORE_URL || 'https://privatespicy.web.app';
 
-let bot = null;
-try {
-    bot = BOT_TOKEN ? new Telegraf(BOT_TOKEN) : null;
-} catch (e) {
-    console.error('❌ [Vercel Telegraf Init Error]:', e.message);
-}
+    // 1. التحقق من توفر توكن البوت
+    if (!BOT_TOKEN) {
+        console.error('❌ [Vercel Webhook Error]: BOT_TOKEN environment variable is missing in Vercel settings!');
+        return res.status(200).json({
+            ok: false,
+            status: 'missing_bot_token',
+            error: 'BOT_TOKEN environment variable is missing on Vercel. Please add BOT_TOKEN in Vercel project settings.'
+        });
+    }
 
-if (bot) {
+    let bot = null;
+    try {
+        bot = new Telegraf(BOT_TOKEN);
+    } catch (e) {
+        console.error('❌ [Vercel Telegraf Init Error]:', e.message);
+        return res.status(200).json({
+            ok: false,
+            status: 'bot_init_failed',
+            error: e.message
+        });
+    }
+
     bot.catch((err, ctx) => {
         console.error(`⚠️ [Vercel Bot Error] (${ctx?.updateType || 'unknown'}):`, err.message);
     });
@@ -248,27 +264,6 @@ if (bot) {
             ctx.reply('للتصفح والشراء، يرجى فتح المتجر عبر /start.').catch(() => {});
         }
     });
-}
-
-// تصدير المعالج لـ Vercel Serverless
-module.exports = async (req, res) => {
-    // 1. التحقق من توفر توكن البوت
-    if (!BOT_TOKEN) {
-        console.error('❌ [Vercel Webhook Error]: BOT_TOKEN environment variable is missing in Vercel settings!');
-        return res.status(200).json({
-            ok: false,
-            status: 'missing_bot_token',
-            error: 'BOT_TOKEN environment variable is missing on Vercel. Please add BOT_TOKEN in project settings.'
-        });
-    }
-
-    if (!bot) {
-        return res.status(200).json({
-            ok: false,
-            status: 'bot_init_failed',
-            error: 'Telegraf bot instance failed to initialize.'
-        });
-    }
 
     // 2. طلبات GET: فحص الحالة وتفعيل Webhook التلقائي
     if (req.method === 'GET') {
