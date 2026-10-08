@@ -1,27 +1,43 @@
 {
   "version": 2,
-  "functions": {
-    "api/*.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/set-webhook",
-      "destination": "/api/webhook?setWebhook=true"
+      "src": "api/webhook.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/test.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/set-webhook",
+      "dest": "/api/webhook.js?setWebhook=true"
     },
     {
       "source": "/webhook",
-      "destination": "/api/webhook"
+      "dest": "/api/webhook.js"
     },
     {
-      "source": "/telegram-webhook",
-      "destination": "/api/webhook"
+      "src": "/telegram-webhook",
+      "dest": "/api/webhook.js"
     },
     {
-      "source": "/((?!public/|api/).*)",
-      "destination": "/public/$1"
+      "src": "/api/test",
+      "dest": "/api/test.js"
+    },
+    {
+      "src": "/api/webhook",
+      "dest": "/api/webhook.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
