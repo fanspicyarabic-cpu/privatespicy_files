@@ -12,14 +12,6 @@
     {
       "source": "/telegram-webhook",
       "destination": "/api/webhook"
-    },
-    {
-      "source": "/:path((?!api/|public/).*)",
-      "destination": "/public/:path"
-    },
-    {
-      "source": "/",
-      "destination": "/public/index.html"
     }
   ]
 }
