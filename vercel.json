@@ -14,14 +14,6 @@
       "destination": "/api/webhook"
     },
     {
-      "source": "/api/webhook",
-      "destination": "/api/webhook"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
       "source": "/((?!public/|api/).*)",
       "destination": "/public/$1"
     }
