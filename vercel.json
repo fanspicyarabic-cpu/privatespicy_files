@@ -2,7 +2,19 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/webhook/(.*)",
+      "source": "/set-webhook",
+      "destination": "/api/webhook?setWebhook=true"
+    },
+    {
+      "source": "/webhook",
+      "destination": "/api/webhook"
+    },
+    {
+      "source": "/telegram-webhook",
+      "destination": "/api/webhook"
+    },
+    {
+      "source": "/api/webhook",
       "destination": "/api/webhook"
     },
     {
@@ -10,7 +22,7 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!public/|api/).*)",
       "destination": "/public/$1"
     }
   ]
